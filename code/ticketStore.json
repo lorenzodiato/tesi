@@ -1,0 +1,44 @@
+{
+  tickets: [
+    {
+      id: 5,
+      name: 'connessione2',
+      location: null,
+      protocol: 'vnc',
+      max_connections: null,
+      max_connections_per_user: null,
+      hostname: '192.168.1.2',
+      port: 1234,
+      password: '1234',
+      cursor: 'local',
+      color_depth: 32,
+      clipboard_encoding: 'UTF-8',
+      note: 'recapito telefonico',
+      status: 2,
+      type: 'group',
+      time: '2019-10-10T08:27:26.000Z',
+      owner: 'lorenzodiato@gmail.com',
+      editConnection: null
+    },
+    {
+      id: 6,
+      name: 'connessione1-2',
+      location: 'g_60',
+      protocol: 'vnc',
+      max_connections: null,
+      max_connections_per_user: null,
+      hostname: '192.168.1.2',
+      port: 1234,
+      password: '1234',
+      cursor: 'local',
+      color_depth: 32,
+      clipboard_encoding: 'UTF-8',
+      note: null,
+      status: -1,
+      type: 'connection',
+      time: '2019-10-16T17:54:01.000Z',
+      owner: 'lorenzodiato@gmail.com',
+      editConnection: null
+    }
+  ]
+}

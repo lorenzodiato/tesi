@@ -1,5 +1,5 @@
 %CLASSE DOCUMENTO - LINGUA E DIMENSIONE FONT
-\documentclass[12pt]{toptesi}
+\documentclass[12pt, cucitura]{toptesi}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -34,10 +34,16 @@
 \usepackage{hyperref}
 \usepackage[backend=bibtex]{biblatex}
 \usepackage{color}
+\usepackage{xcolor}
+\usepackage{adjustbox}
 
 \definecolor{lightgray}{rgb}{.9,.9,.9}
 \definecolor{darkgray}{rgb}{.4,.4,.4}
 \definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{F1F3F4}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -49,14 +55,15 @@
     colorlinks,
     linkcolor={black}, %COLORE DEI RIFERIMENTI AL TESTO
     citecolor={blue}, %COLORE DEI RIFERIMENTI ALLE CITAZIONI
-    urlcolor={blue} %COLORI DEGLI URL
+    urlcolor={black} %COLORI DEGLI URL
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % CONFIGURAZIONE LISTATI/CODICE - CANCELLARE SE NON NECESSARIO
+
 \lstdefinelanguage{JavaScript}{
-  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, let, const, if, in, while, do, else, case, default, break},
   keywordstyle=\color{blue}\bfseries,
   ndkeywords={class, export, boolean, throw, implements, import, this},
   ndkeywordstyle=\color{darkgray}\bfseries,
@@ -70,16 +77,62 @@
   morestring=[b]"
 }
 
-\lstset{%
-	captionpos=b,
+\lstdefinelanguage{json}{
+    basicstyle=\normalfont\ttfamily,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=8pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=none,
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+\lstdefinestyle{JavaScriptStyle}{
+    captionpos=b,
 	language=JavaScript,
 	basicstyle =\small\ttfamily,
-	keywordstyle=\color{black}\bfseries,
 	breaklines=true,
 	breakatwhitespace=true,
-	frame=lines,
+	frame=none,
 	numbers=left,
 	numberstyle=\footnotesize,
+	aboveskip=20pt,
+	belowskip=10pt,
+	lineskip=3pt,
+	showstringspaces=false,
+}
+
+\lstdefinestyle{JsonStyle}{
+    captionpos=b,
+	language=json,
+	basicstyle =\small\ttfamily,
+	breaklines=true,
+	breakatwhitespace=true,
+	frame=none,
+	numbers=left,
+	numberstyle=\footnotesize,
+	aboveskip=20pt,
+	belowskip=10pt,
+	lineskip=4pt,
+	showstringspaces=false
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -131,11 +184,14 @@
 % LOGO UNIVERSITA
 \logosede[50mm]{images/logo}
 
+%binding correction
+\setbindingcorrection{7mm}
+
 % TIPOLOGIA TESI
 \TesiDiLaurea{\Large{Tesi di Laurea Triennale in Informatica}}
 
 % TITOLO
-\titolo{OVL DASHBOARD}
+\titolo{SVILUPPO OVL DASHBOARD}
 				
 % RELATORE/I - DICITURA - CANCELLARE SE UN SOLO RELATORE
 % RELATORE - PROF. NOME E COGNOME
@@ -144,7 +200,7 @@
 % TUTORE AZIENDALE - TITOLO NOME E COGNOME
 \tutoreaziendale{Dott. Bruno Cavigioli}
 % TUTORE AZIENDALE - DICITURA//AZIENDA
-\NomeTutoreAziendale{Tutore Aziendale\\Themis s.r.l}
+\NomeTutoreAziendale{Tutor Aziendale\\Themis s.r.l}
 
 % CANDIDATO - DICITURA (MANTENERE I DUE PUNTI) - CANCELLARE O DECOMMENTARE
 %\CandidateName{Candidate:}
@@ -153,19 +209,21 @@
 \candidato{Lorenzo Diato}
 
 % DATA - MESE ANNO
-\sedutadilaurea{ANNO ACCADEMICO 2019-20}
+\sedutadilaurea{ANNO ACCADEMICO 2018-19}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % LISTA DEI CAPITOLI DA INCLUDERE - PERSONALIZZARE
 \includeonly{%
 introduzione,%
-app_a,%
+descrizione_del_progetto,
+frontend,
+backend,
+conclusioni
 }
 
 % FILE DI BIBLIOGRAFIA
 \bibliography{bibliography} 
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -177,7 +235,7 @@ app_a,%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %INTERLINEA - DEFAULT 1 - NON ESAGERATE, NON SUPERATE MAI 1.3 ;)
-%\interlinea{1.2}
+\interlinea{1.2}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -187,10 +245,7 @@ Ringrazio la mia relatrice, la professoressa Giovanna Petrone, per la
 cordialità e la professionalità con cui mi ha seguito durante la
 realizzazione di questo lavoro. Ringrazio inoltre il Dott. Bruno Cavigioli per
 avermi aiutato anch’egli nella creazione del sito e nella stesura dell’elaborato.
-Vorrei infine ringraziare la mia famiglia che mi ha sempre sostenuto durante il
-mio percorso di studi e mi ha permesso di raggiungere questo risultato. Inoltre,
-vorrei anche ringraziare il mio gruppo di amici con i quali ho frequentato e studiato,
-grazie al quale ho sempre trovato motivazione e ottimi consigli.
+Vorrei ingraziare la mia famiglia che mi ha sempre sostenuto durante il percorso di studi e mi ha permesso di raggiungere questo risultato. Per ultimi, ma non meno importanti, il mio gruppo di amici con i quali ho frequentato e studiato e grazie al quale ho sempre trovato motivazione e ottimi consigli.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -200,13 +255,13 @@ grazie al quale ho sempre trovato motivazione e ottimi consigli.
 \tableofcontents
 
 % INDICE DELLE FIGURE
-\listoffigures
+%\listoffigures
 
 % INDICE DELLE TABELLE
-\listoftables
+%\listoftables
 
 % INDICE DEI CODICI
-\listofcodes
+%\listofcodes
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -214,10 +269,10 @@ grazie al quale ho sempre trovato motivazione e ottimi consigli.
 
 % INCLUSIONE FILE CAPITOLI - PERSONALIZZARE - TENERE COERENTE CON LISTA IN ALTO
 \include{introduzione}
-
-\appendix
-% INCLUSIONE APPENDICI - - PERSONALIZZARE - TENERE COERENTE CON LISTA IN ALTO
-\include{app_a}
+\include{descrizione_del_progetto}
+\include{frontend}
+\include{backend}
+\include{conclusioni}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
